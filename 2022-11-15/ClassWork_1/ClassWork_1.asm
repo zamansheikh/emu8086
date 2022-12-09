@@ -21,11 +21,16 @@ include 'emu8086.inc'
         
         cmp bl,"4" 
         mov cl,'0'
-        jle ZtoF
+        jle ifItIsLessThanOrEual4
         
         mov cl,"5"
-        
-        FtoN:
+        print 'This value this greater than 4 , So: '  
+         mov ah,2
+         mov dl,0ah
+         int 21h
+         mov dl,0dh
+         int 21h
+        print5to9:
             cmp cl,"9"
             jg exit 
             
@@ -38,10 +43,17 @@ include 'emu8086.inc'
             int 21h
             mov dl,0dh
             int 21h
-            jmp FtoN  
+            jmp print5to9  
          
         
-        ZtoF:        
+        ifItIsLessThanOrEual4: 
+            print 'This value this less than 5 , So: ' 
+            mov ah,2
+            mov dl,0ah
+            int 21h
+            mov dl,0dh
+            int 21h
+            print0to4:       
             cmp cl,"5"
             je exit 
             
@@ -54,7 +66,7 @@ include 'emu8086.inc'
             int 21h
             mov dl,0dh
             int 21h
-            jmp ZtoF 
+            jmp print0to4 
             
             
             

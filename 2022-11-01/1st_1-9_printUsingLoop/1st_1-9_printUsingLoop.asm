@@ -8,16 +8,16 @@ include 'emu8086.inc'
         
         mov cx,9
         
-        mov dx,'1'
+        mov dl,'1'
         
-        print "Number: "
+        print "Number!1to9: "
         
-        number:
+        printNumber:
             mov ah,2
             int 21h
-            inc dx
+            inc dl
             
-            loop number
+            loop printNumber
 
         main endp
     end main

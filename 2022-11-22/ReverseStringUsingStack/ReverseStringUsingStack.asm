@@ -6,17 +6,17 @@
         mov cx,0
         mov ah,1       ; input Instraction
    
-        lebel1: 
+        TakeInputAndPushingIntoStack: 
             int 21h        ; Console connect --> Take input
             cmp al,0dh
-            je lebel2
+            je IfPressEnterThenBreak
             
             push ax                         
             inc cx 
-            jmp lebel1
+            jmp TakeInputAndPushingIntoStack
         
-        lebel2:
-            cmp cx,0
+        IfPressEnterThenBreak:
+            cmp cx,0    ;if StackEmpty then exit
             je exit
             
             mov ah,2
@@ -25,11 +25,11 @@
             mov dl,0dh
             int 21h
                   
-        lebel3:
+        pushAndPrintStack:
             pop dx
              
             int 21h
-            loop lebel3
+            loop pushAndPrintStack
             
         exit:
             mov ah,4 

@@ -4,14 +4,10 @@ include 'emu8086.inc'
 .data 
 
 .code
-    main proc 
-        
+    main proc         
         mov cx,'9'
-        
         mov bl,'0'
-        
-        print "Number: "
-        
+        print "Number (0-9): "
         number:
             mov ah,2
             mov dl,bl
@@ -19,30 +15,25 @@ include 'emu8086.inc'
             inc bl  
             
             cmp cx,'0'
-            je lebel
-            
+            je BigAlphabet
             loop number 
-            
-        
-        lebel:
+        BigAlphabet:
             mov ah,2
             mov dl,0ah
             int 21h
             mov dl,0dh
             int 21h
             mov bh,'A'
-            mov cx, 'Z'
+            mov cx, 26
             print 'Alphabet: '
             
-        alphabet:
+        looping:
             mov ah,2
             mov dl,bh
             int 21h
             inc bh  
-            
-            cmp cx,'A'
             je exit 
-            loop alphabet  
+            loop looping  
                      
             
         exit:
